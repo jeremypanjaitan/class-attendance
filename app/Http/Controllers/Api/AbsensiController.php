@@ -23,9 +23,20 @@ class AbsensiController extends Controller
         $email = $request->json('email');
         $namaKelas = $request->json('nama_kelas');
         $fullName = $request->json('full_name');
-        $absensiDto = new AbsensiDTO($fullName, $namaKelas, $email);
+        $nim = $request->json('nim');
+        $absensiDto = new AbsensiDTO($fullName, $namaKelas, $email, $nim);
 
 
         $this->absensiService->initiateAbsensi($absensiDto);
+        return "success";
+    }
+
+    public function executeAbsensi(Request $request)
+    {
+        $email = $request->json('email');
+        $nim = $request->json('auth_code');
+
+        $this->absensiService->executeAbsensi($email, $nim);
+        return "success";
     }
 }

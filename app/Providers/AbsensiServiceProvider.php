@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use AbsensiService;
+use App\Services\Absensi\AbsensiService;
 use App\Services\EmailVerification\EmailVerificationService;
 use Illuminate\Support\ServiceProvider;
 

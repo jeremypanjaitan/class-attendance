@@ -9,8 +9,6 @@ class EmailVerificationService
 {
     public function sendAbsensiAuthCode(AuthDataDTO $userAuthData)
     {
-        // TODO: generate auth code
-
         Mail::to('jeremypanjaitan@gmail.com')->send(new EmailVerificationMailable($userAuthData));
     }
 }

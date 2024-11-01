@@ -4,7 +4,6 @@ namespace App\Services\Absensi;
 
 use App\Helpers\AuthCodeGenerator;
 use App\Models\Absensi;
-use App\Services\Absensi\AbsensiDTO;
 use App\Services\EmailVerification\AuthDataDTO;
 use App\Services\EmailVerification\EmailVerificationService;
 
@@ -17,7 +16,7 @@ class AbsensiService
         $this->emailVerificationService = $emailVerificationService;
     }
 
-    public function initiateAbsensi(AbsensiDTO $absensiDTO)
+    public function initiateAbsensi(AbsensiDTO $absensiDTO): bool
     {
         $authCode = AuthCodeGenerator::generateAuthCode();
 
@@ -34,5 +33,18 @@ class AbsensiService
 
         $authUserData = new AuthDataDTO($absensiDTO->email, $absensiDTO->namaKelas, $authCode);
         $this->emailVerificationService->sendAbsensiAuthCode($authUserData);
+        return true;
+    }
+
+    public function executeAbsensi(string $email, string $authCode): bool
+    {
+        $isAbsensiMahasiswaExist = Absensi::where('email', $email)->where('auth_code', $authCode)->exists();
+
+        if (!$isAbsensiMahasiswaExist) {
+            return false;
+        }
+
+        Absensi::where('email', $email)->where('auth_code', $authCode)->update(['status' => 'SUCCESS']);
+        return true;
     }
 }
