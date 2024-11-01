@@ -3,28 +3,29 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\EmailVerification\EmailVerificationService;
-use App\Services\EmailVerification\AuthDataDTO;
+use App\Services\Absensi\AbsensiDTO;
+use App\Services\Absensi\AbsensiService;
 use Illuminate\Http\Request;
 
 class AbsensiController extends Controller
 {
-    protected EmailVerificationService $emailVerificationService;
+    protected AbsensiService $absensiService;
 
 
     //  Type hinting ProductService di constructor
-    public function __construct(EmailVerificationService $emailVerificationService)
+    public function __construct(AbsensiService $absensiService)
     {
-        $this->emailVerificationService = $emailVerificationService;
+        $this->absensiService = $absensiService;
     }
 
     public function initiateAbsensi(Request $request)
     {
         $email = $request->json('email');
-        $nama_kelas = $request->json('nama_kelas');
-        $authDataDto = new AuthDataDTO($email, $nama_kelas, '12345');
+        $namaKelas = $request->json('nama_kelas');
+        $fullName = $request->json('full_name');
+        $absensiDto = new AbsensiDTO($fullName, $namaKelas, $email);
 
 
-        $this->emailVerificationService->sendAbsensiAuthCode($authDataDto);
+        $this->absensiService->initiateAbsensi($absensiDto);
     }
 }

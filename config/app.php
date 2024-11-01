@@ -194,7 +194,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\EmailVerificationServiceProvider::class
+        App\Providers\EmailVerificationServiceProvider::class,
+        App\Providers\AbsensiServiceProvider::class
+
     ],
 
     /*
