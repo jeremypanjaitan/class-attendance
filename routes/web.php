@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WebAbsensiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/absensi/mahasiswa', [WebAbsensiController::class,'index'])->name('absensi');
+Route::post('/absensi/mahasiswa/initiate', [WebAbsensiController::class, 'initiateAbsensi'])->name('initiateAbsensi');
