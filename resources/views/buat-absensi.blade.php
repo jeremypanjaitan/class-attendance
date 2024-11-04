@@ -13,7 +13,7 @@
         <input type="text" class="form-control" id="fullName" name="full_name">
     </div>
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Nama Kelas</label>
+        <label for="exampleFormControlInput1" class="form-label" hidden>Nama Kelas</label>
         <input type="hidden" class="form-control" id="namaKelas" name="nama_kelas" value="Pemrograman Berorientasi Objek">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

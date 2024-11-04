@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('absensi');
 });
 
 Route::get('/absensi/mahasiswa', [WebAbsensiController::class,'index'])->name('absensi');
