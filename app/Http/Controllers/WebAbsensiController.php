@@ -17,7 +17,7 @@ class WebAbsensiController extends Controller
     }
     public function index()
     {
-        return view("absensi");
+        return view('absensi');
     }
 
     public function initiateAbsensi(Request $request)
@@ -30,10 +30,22 @@ class WebAbsensiController extends Controller
 
         $this->absensiService->initiateAbsensi($absensiDto);
 
-        session()->flash('success', 'Form Anda berhasil disubmit!');
 
-        return redirect()->route('absensi');
+        session()->flash('success', 'Silahkan cek authentication code pada email anda !');
 
+        return redirect()->route('absensi')->with('active-tab', 'nav-buat-absensi-tab');
+
+    }
+
+    public function executeAbsensi(Request $request)
+    {
+        $email = $request->input('email');
+        $authCode = $request-> input('auth_code');
+
+        $this->absensiService->executeAbsensi($email, $authCode);
+
+        session()->flash('success','Absensi berhasil di tambahkan !');
+        return redirect()->route('absensi')->with('active-tab','nav-validasi-absensi-tab');
     }
 
 }

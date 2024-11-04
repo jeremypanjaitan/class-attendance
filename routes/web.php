@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/absensi/mahasiswa', [WebAbsensiController::class,'index'])->name('absensi');
 Route::post('/absensi/mahasiswa/initiate', [WebAbsensiController::class, 'initiateAbsensi'])->name('initiateAbsensi');
+Route::post('/absensi/mahasiswa/execute', [WebAbsensiController::class,'executeAbsensi'])->name('executeAbsensi');
