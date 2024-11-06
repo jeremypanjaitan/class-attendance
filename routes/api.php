@@ -23,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/echo', [TestController::class, 'index']);
 Route::post('/mahasiswa/initiate-absensi', [AbsensiController::class, 'initiateAbsensi']);
 Route::post('/mahasiswa/execute-absensi', [AbsensiController::class, 'executeAbsensi']);
+
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
